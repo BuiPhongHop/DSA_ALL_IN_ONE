@@ -43,7 +43,7 @@ int solveDiffProblem1(int arr[] , int l, int r){
 
 
 // Solve by a better way (but not use D&C)
-int solveProblemDiff2(int arr[] , int size){
+int solveDiffProblem2(int arr[] , int size){
     if(size <= 1) return 0;
 
     int result /*max(aj - ai)*/ = INT_MIN;
@@ -59,6 +59,6 @@ int solveProblemDiff2(int arr[] , int size){
 
 
 int main(){
-    int array[6] = {7, 1, 5, 3, 6, 4};
-    cout << solveDiffProblem1(array, 0, 5);
+    int array[2] = {7, 1};
+    cout << solveDiffProblem2(array, 2);
 }
