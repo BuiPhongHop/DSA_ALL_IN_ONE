@@ -38,7 +38,6 @@ void mergeSort(int arr[] , int l, int r){
     // combine the array
     mergeSubproblem(arr, l , mid, mid + 1, r);
 }
-
 int main(){
     int arr[11] = {3, 2, 5, 6, 6, 4, 3, 1, 2, 6, 7};
     mergeSort(arr, 0, 10);
