@@ -20,7 +20,7 @@ void printArray(int n){
 
 
 /* Question 2 */
-void printPatten(int n){
+void printPattern(int n){
     // base case
     if(n <= 0){
         cout << n << " ";
@@ -29,8 +29,8 @@ void printPatten(int n){
 
     // recursive step
     cout << n << " ";
-    printPatten(n - 5);
-    cout << n << " "; 
+    printPattern(n - 5);
+    cout << " " << n; 
 }
 // Time complexity: O(n)
 
@@ -44,6 +44,29 @@ int findMax(int *arr , int length){
     return max(arr[length - 1] , findMax(arr , length - 1));
 }
 // Time complexity: O(n)
+
+
+/* Question 4 */
+bool isPalindrome(string str) 
+{ 
+    int n = (int)str.size();
+    
+    // Solve the problem if first and last elements is ' '
+    if(str[0] == ' '){
+        return isPalindrome(str.substr(1, n - 1));
+    }
+    if(str[n - 1] == ' '){
+        return isPalindrome(str.substr(0, n - 1));
+    }
+    
+    // base line
+    if(n <= 1) return true;
+    if(n == 2) return str[0] == str[1];
+    
+    // recursive
+    if(str[0] != str[n - 1]) return false;
+    return isPalindrome(str.substr(1, n - 2));
+}
 
 
 /* Question 5 */
@@ -103,11 +126,12 @@ string expand(string s){
 /* Question 7 */
 // Hailstone string
 void printHailstone(int number){
-    cout << number << " ";
-
     if(number == 1){
+        cout << number;
         return;
     }
+
+    cout << number << " ";
 
     if(number % 2 == 0){
         number /= 2;
@@ -121,27 +145,52 @@ void printHailstone(int number){
 }
 
 
+/* Question 8 */
+int myArrayToInt(char *str, int n) 
+{ 
+    // baseline
+    if(n == 0) return 0;
+    
+    // recursive
+    int num = str[n - 1] - '0';
+    return num + 10 * myArrayToInt(str, n - 1);
+}
+
+
 /* Question 10 */
-int solve(string s, int index, int open_needed, int added) {
-    // base case
-    if(index == s.length()) {
+int solve(const string& s, int index, int open_needed, int added) {
+    // Baseline
+    if (index == (int)s.length()) {
         return open_needed + added;
     }
-    
-    // recursive step
-    if(s[index] == '('){
-        return solve(s, index + 1, open_needed + 1, added);
-    }
-    else{
-        if (open_needed > 0){
-            return solve(s, index + 1, open_needed - 1, added);
-        } 
 
-        else{
+    // Recursive step
+    if (s[index] == '(') {
+        return solve(s, index + 1, open_needed + 1, added);
+    } else {
+        if (open_needed > 0) {
+            return solve(s, index + 1, open_needed - 1, added);
+        } else {
             return solve(s, index + 1, open_needed, added + 1);
         }
     }
 }
+
 int mininumBracketAdd(string s) {
     return solve(s, 0, 0, 0);
+}
+
+
+/* Question 11 */
+string reverseSentence(string s) {
+    // baseline
+    int pos = (int)s.find(' ');
+    if(pos == -1){
+        return s;
+    }
+    
+    // recursive
+    string str = s.substr(0, pos);
+    int size_left = (int)s.size() - (pos + 1);
+    return reverseSentence(s.substr(pos + 1, size_left)) + " " + str;
 }
